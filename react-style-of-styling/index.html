@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React-style of styling</title>
+
+  <!-- React -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <!-- React DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <!-- Babel -->
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script type="text/babel">
+    const dest = document.querySelector('#container');
+
+    class Letter extends React.Component {
+      
+      render(){
+        const  styles = {
+          letter: {
+            padding: 10,
+            margin: 10,
+            backgroundColor: this.props.bgColor,
+            color: '#333',
+            display: 'inline-block',
+            fontFamily: 'monospace',
+            fontSize: 32,
+            textAlign: 'center'
+          }
+      }
+
+        return (
+          <div style={styles.letter}>
+            {this.props.children}
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <div>
+        <Letter bgColor="#58B3FF">А</Letter>
+        <Letter bgColor="#FF605F">Е</Letter>
+        <Letter bgColor="#FFD52E">И</Letter>
+        <Letter bgColor="#49DD8E">О</Letter>
+        <Letter bgColor="#AE99FF">У</Letter>  
+      </div>,
+      dest
+    )
+  </script>
+</body>
+
+</html>
