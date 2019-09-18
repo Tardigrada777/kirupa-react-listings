@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React events</title>
+
+  <!-- React -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <!-- React DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <!-- Babel -->
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script type="text/babel">
+
+    class Counter extends React.Component {
+      render(){
+        const styles = {
+          text: {
+            fontSize: 72,
+            fontFamily: 'sans-serif',
+            color: '#333',
+            fontWeight: 'bold'
+          }
+        }
+
+        return (
+          <div style={styles.text}>
+            {this.props.display}
+          </div>
+        )
+      }
+    }
+
+    class PlusButton extends React.Component {
+      render(){
+        const styles = {
+          button: {
+            fontSize: "1em",
+            width: 30, 
+            height: 30,
+            fontFamily: "sans-serif",
+            color: "#fff",
+            fontWeight: 'bold',
+            lineHeight: "3px",
+            backgroundColor: "black",
+            border: 'none',
+            borderRadius: '50%',
+            outline: 'none',
+            cursor: 'pointer'
+          }
+        }
+
+        return (
+          <button style={styles.button} onClick={this.props.clickHandler}>+</button>
+        )
+      }
+    }
+
+    class CounterParent extends React.Component {
+      constructor(props){
+        super(props);
+
+        this.state = {
+          count: 0
+        }
+      
+        this.increase = this.increase.bind(this)
+      }
+
+      increase(event){
+        let currentCount = event.shiftKey ? this.state.count + 10 : this.state.count + 1;
+        
+        this.setState({
+          count: currentCount
+        })
+      }
+
+      render(){
+        const styles = {
+          background: {
+            padding: 50,
+            backgroundColor: '#FFC53A',
+            width: 250,
+            height: 100,
+            borderRadius: 10,
+            textAlign: "center"
+          }
+         
+        }
+
+        return (
+          <div style={styles.background}>
+            <Counter display={this.state.count} />
+            <PlusButton clickHandler={this.increase}>+</PlusButton>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <div>
+        <CounterParent />
+      </div>,
+      document.querySelector('#container')
+    )
+  </script>
+</body>
+
+</html>
